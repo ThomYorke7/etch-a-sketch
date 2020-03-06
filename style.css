@@ -1,0 +1,23 @@
+:root {
+    --quantity: 16;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+
+#container {
+    display: grid;
+    grid-template-columns: repeat(var(--quantity), 1fr);
+    grid-template-rows: repeat(var(--quantity), 1fr);
+    height: 80vh;
+    width: 60vw;
+}
+
+.cell {
+    height: auto;
+    width: auto;
+    border: 1px solid black;
+}
