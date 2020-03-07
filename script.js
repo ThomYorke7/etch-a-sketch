@@ -24,13 +24,23 @@ resizebtn.addEventListener("click", () => {
     cellColor();
 })
 
-
+function createColor() {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
 
 function cellColor() {
     for (let i = 0; i < cells.length; i++) {
-        cells[i].addEventListener("mouseover", () => {
-            const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-            cells[i].style.backgroundColor = "#" + randomColor;
+        cells[i].addEventListener("mouseover", (e) => {
+            const backgroundColor = getComputedStyle(e.target).getPropertyValue("background-color");
+            console.log(backgroundColor)
+            if (backgroundColor == "rgb(255, 255, 255)") {
+                cells[i].style.backgroundColor = createColor();
+                cells[i].style.filter = "brightness(1)";
+            } else if (backgroundColor != "rgb(255, 255, 255)") {
+                const brightness = getComputedStyle(e.target).getPropertyValue("filter").split(/\(([^)]+)\)/)
+                console.log(brightness)
+                cells[i].style.filter = `brightness(${brightness[1] - 0.2})`;
+            }
         })
     }
 }
@@ -38,7 +48,8 @@ function cellColor() {
 function cellClear() {
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("mouseover", () => {
-            cells[i].style.backgroundColor = "white";
+            cells[i].style.backgroundColor = "rgb(255, 255, 255)";
+            cells[i].style.filter = "brightness(1)";
         })
     }
 }
