@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+
 :root {
     --quantity: 16;
 }
@@ -5,8 +7,42 @@
 html, body {
     margin: 0;
     padding: 0;
+    font-family: 'Gochi Hand', cursive;
 }
 
+nav {
+    display:flex;
+    width: 92vw;
+    justify-content: space-between;
+    margin-left: 40px;
+    margin-bottom: 5px;
+}
+
+h1 {
+    font-size: 50px;
+    margin-left: 3rem;
+}
+
+#instructions {
+    font-size: 30px;
+    float: right;
+    margin-right: 6rem;
+    margin-top: 0;
+}
+
+#instructions > *{
+    margin-top: 5px;
+    font-size: 25px;
+}
+
+#resize {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#resize:hover {
+    cursor: pointer;
+}
 
 #container {
     display: grid;
@@ -14,6 +50,7 @@ html, body {
     grid-template-rows: repeat(var(--quantity), 1fr);
     height: 80vh;
     width: 60vw;
+    margin-left: 3rem;
 }
 
 .cell {

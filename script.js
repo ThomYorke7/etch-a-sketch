@@ -1,7 +1,5 @@
 const container = document.querySelector("#container");
-const resizebtn = document.querySelector("#reset");
-const clearbtn = document.querySelector("#clear");
-const rainbowbtn = document.querySelector("#rainbow");
+const resizebtn = document.querySelector("#resize");
 const gridLines = document.documentElement;
 const cells = document.getElementsByClassName("cell");
 
@@ -22,6 +20,7 @@ resizebtn.addEventListener("click", () => {
     createCells(quantity);
     gridLines.style.setProperty("--quantity", quantity)
     cellColor();
+    cellClear();
 })
 
 function createColor() {
@@ -31,15 +30,12 @@ function createColor() {
 function cellColor() {
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener("mouseover", (e) => {
-            const backgroundColor = getComputedStyle(e.target).getPropertyValue("background-color");
-            console.log(backgroundColor)
-            if (backgroundColor == "rgb(255, 255, 255)") {
-                cells[i].style.backgroundColor = createColor();
-                cells[i].style.filter = "brightness(1)";
-            } else if (backgroundColor != "rgb(255, 255, 255)") {
-                const brightness = getComputedStyle(e.target).getPropertyValue("filter").split(/\(([^)]+)\)/)
-                console.log(brightness)
-                cells[i].style.filter = `brightness(${brightness[1] - 0.2})`;
+            let brightness = getComputedStyle(e.target).getPropertyValue("filter").split(/\(([^)]+)\)/);
+            if (brightness == "none") {
+                e.target.style.backgroundColor = createColor();
+                e.target.style.filter = "brightness(1)";
+            } else if (brightness[1] > 0) {
+                e.target.style.filter = `brightness(${brightness[1] - 0.2})`;
             }
         })
     }
@@ -47,15 +43,12 @@ function cellColor() {
 
 function cellClear() {
     for (let i = 0; i < cells.length; i++) {
-        cells[i].addEventListener("mouseover", () => {
-            cells[i].style.backgroundColor = "rgb(255, 255, 255)";
-            cells[i].style.filter = "brightness(1)";
+        cells[i].addEventListener("click", () => {
+            cells[i].removeAttribute("style")
         })
     }
 }
 
 createCells();
 cellColor();
-
-clearbtn.addEventListener("click", cellClear);
-rainbowbtn.addEventListener("click", cellColor);
+cellClear();
