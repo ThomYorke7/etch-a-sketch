@@ -4,10 +4,14 @@
     --quantity: 16;
 }
 
-html, body {
+html {
     margin: 0;
     padding: 0;
     font-family: 'Gochi Hand', cursive;
+    background-image: url(./images/pencils.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
 }
 
 nav {
@@ -26,8 +30,8 @@ h1 {
 #instructions {
     font-size: 30px;
     float: right;
-    margin-right: 6rem;
-    margin-top: 0;
+    margin-right: 9rem;
+    margin-top: 30rem;
 }
 
 #instructions > *{
